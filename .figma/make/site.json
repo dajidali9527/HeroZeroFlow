@@ -1,0 +1,10 @@
+{
+  "description": "Create engaging Hero and Zero Flow animations with a user-friendly interface designed for Chinese-speaking users, enhancing web design experiences.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
