@@ -4,121 +4,110 @@
 @theme {
   --font-sans: 'Bricolage Grotesque', 'Noto Sans SC', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --color-background: #06080C;
-  --color-foreground: #D8E8E2;
-  --color-muted: rgba(200, 220, 215, 0.4);
-  --color-border: rgba(200, 220, 215, 0.1);
-  --color-accent: #9ECABB;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #06080C;
+  background-color: #08061a;
   color: #D8E8E2;
   font-family: 'Bricolage Grotesque', 'Noto Sans SC', sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::-webkit-scrollbar { display: none; }
-* { scrollbar-width: none; }
+* { scrollbar-width: none; box-sizing: border-box; }
 
-/* ── River draw animations ─────────────────────────── */
+/* ── Animations ─────────────────────────────────────────────────────── */
 @keyframes drawPath {
-  from { stroke-dashoffset: 4000; opacity: 0; }
-  5%   { opacity: 1; }
+  from { stroke-dashoffset: 5200; opacity: 0; }
+  4%   { opacity: 1; }
   to   { stroke-dashoffset: 0; opacity: 1; }
 }
-
 @keyframes drawBranch {
-  from { stroke-dashoffset: 800; opacity: 0; }
-  10%  { opacity: 1; }
-  to   { stroke-dashoffset: 0; opacity: 0.6; }
+  from { stroke-dashoffset: 600; opacity: 0; }
+  8%   { opacity: 1; }
+  to   { stroke-dashoffset: 0; opacity: 0.55; }
 }
-
 @keyframes fragmentIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.82); }
   to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-
-/* Float lives on the inner wrapper — only translateY, no conflict */
 @keyframes fragmentFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
 }
-
 @keyframes nodeBloom {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-  60%  { transform: translate(-50%, -50%) scale(1.04); }
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  65%  { transform: translate(-50%, -50%) scale(1.06); }
   to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-
 @keyframes nodePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(158, 202, 187, 0); }
-  50%       { box-shadow: 0 0 32px 8px rgba(158, 202, 187, 0.15); }
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
 }
-
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ringRotateRev {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes heroLine {
-  from { transform: scaleX(0); opacity: 0; }
-  to   { transform: scaleX(1); opacity: 1; }
+@keyframes arrowBob {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(7px); opacity: 0.8; }
 }
-
 @keyframes particleFlow {
   0%   { opacity: 0; }
-  10%  { opacity: 0.9; }
-  90%  { opacity: 0.9; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.9; }
   100% { opacity: 0; }
 }
-
-@keyframes arrowDrop {
-  0%, 100% { transform: translateY(0) translateX(-50%); opacity: 0.5; }
-  50%       { transform: translateY(6px) translateX(-50%); opacity: 1; }
+@keyframes logoReveal {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes stepReveal {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes lineGrow {
+  from { height: 0; }
+  to   { height: 100%; }
 }
 
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 0.7; }
-}
-
-/* ── Fragment card styles ─────────────────────────── */
-.fragment-card {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  animation: fragmentIn 0.6s ease-out both, fragmentFloat 6s ease-in-out infinite;
-}
-
-.fragment-card-inner {
-  padding: 8px 14px;
-  background: rgba(8, 18, 14, 0.72);
-  border: 1px solid rgba(158, 202, 187, 0.18);
-  backdrop-filter: blur(6px);
-  font-size: 13px;
-  letter-spacing: 0.02em;
+/* ── Fragment chips ─────────────────────────────────────────────────── */
+.chip {
+  padding: 5px 10px;
+  background: rgba(8, 12, 22, 0.78);
+  border: 1px solid rgba(158, 202, 187, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 11px;
+  letter-spacing: 0.03em;
   white-space: nowrap;
+  color: rgba(200, 218, 212, 0.72);
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 400;
-  color: rgba(200, 225, 215, 0.7);
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+  will-change: transform;
 }
-
-.fragment-card-inner.mono {
+.chip.mono {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: rgba(158, 202, 187, 0.75);
-  letter-spacing: 0.04em;
+  font-size: 10px;
+  color: rgba(158, 202, 187, 0.78);
+  letter-spacing: 0.06em;
 }
+.chip.problem { border-left: 2px solid rgba(220, 175, 130, 0.55); }
+.chip.tech    { border-right: 2px solid rgba(158, 202, 187, 0.55); }
 
-.fragment-card-inner.problem {
-  border-left: 2px solid rgba(220, 180, 140, 0.5);
-}
-
-.fragment-card-inner.tech {
-  border-right: 2px solid rgba(158, 202, 187, 0.5);
+@media (min-width: 768px) {
+  .chip         { font-size: 12px; padding: 6px 12px; }
+  .chip.mono    { font-size: 11px; }
 }
